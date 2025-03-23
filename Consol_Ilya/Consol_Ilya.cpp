@@ -17,12 +17,9 @@ struct player_ {
 
 player_ user;
 player_ enemy;
-//drftgdf
-Weapon chouse;
+//Weapon chouse;
 void introduction();
-void room1();
-//void room2();
-void chouse_weapon();
+//void chouse_weapon();
 void road();
 void delivery();
 void houseofcultists();
@@ -64,18 +61,20 @@ void car() {
     else {
         cout << "Вы проехали еще немного и заглохли." << endl;
         cout << "Game OVER\n" << endl;
+        exit (1);
     }
 }
 
 // Путь к дому
 void road() {
     string situation[5];
-    situation[0] = "Обвал камней с холма рядом с дорогой\n";
-    situation[1] = "Остановили дпс\n";
-    situation[2] = "Пробежал олень\n";
-    situation[3] = "Вы увидели странные символы на деревьях\n";
-    situation[4] = "Вы увидели промелькнувшую в кустах тень\n";
+    situation[0] = "Внезапно произошел обвал камней рядом с дорогой, но вас не задело.\n";
+    situation[1] = "Вас остановили ДПС для проверки документов. С ними все в порядке, едьте дальше.\n";
+    situation[2] = "Мимо вашей машины пробежал олень.\n";
+    situation[3] = "Вы увидели странные символы на деревьях, они похожи на руны нарисованные красной краской.\n";
+    situation[4] = "Вы увидели промелькнувшую в кустах тень неведомого существа.\n";
     // ДОПИСАТЬ, РАСПИСАТЬ, НОРМАЛЬНО ЧТОБ   БЫЛО!!! с Николай
+    // Дело сделано... с Илья
     int temp = 0 + rand() % 4;
     cout << situation[temp] << endl;
     delivery();
@@ -168,10 +167,8 @@ void artifact() {
 void firstcontact() {
     cout << "Пока Алекс изучает комнату, неожиданно в двери появляется культист в длинном темном одеянии с капюшоном." << endl;
     cout << "Он ведёт себя странно, и его голос звучит как шепот: “Ты не должен здесь быть...” " << endl;
-    //В зависимости от выбора игрока, сцена может развернуться несколькими способами:
-    //-Сбежать: Алекс пытается убежать обратно в коридор, но не удается.
-    //- Убедить культиста : Он может попробовать убедить культиста, что ему нужно знать больше о доме и ритуалах.Это может привести к получению более глубокой информации.
-    //- РЕЗНЯ
+    fight();
+    
 }
 void fight() {
     cout << "Вы можете ударить этого человека или убежать." << endl;
@@ -187,21 +184,23 @@ void fight() {
     switch (a)
     {
     case 1 : 
-        cout << "Вы наносите урон культисту.\n" << endl;
-        enemy.hp - user.attack;
+        
         while (!win) {
-            if (enemy.hp == 0) {
+            if (enemy.hp <= 0) {
                 cout << "Вы вырубили культиста.\n" << endl;
                 win = true;
                 // Дальше следующая комнатка пойдет,
             }
             else
             {
+                cout << "Вы наносите урон культисту.\n" << endl;
+                enemy.hp -= user.attack;
                 cout << "Культист собирается ударить вас.\n" << endl;
-                user.hp - enemy.attack;
+                user.hp -= enemy.attack;
                 
             }
         }
+        break;
     case 2 :
         cout << "Вы убегаете из дома.";
         break;
@@ -215,12 +214,11 @@ int main() {
     system("chcp 1251");
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
-    //chouse_weapon();
-    //introduction();
-    //room1();
-    //car();
-    //road();
-    //delivery();
+    // chouse_weapon();
+    introduction();
+    car();
+    road();
+    delivery();
     fight();
     return 0;
 }
