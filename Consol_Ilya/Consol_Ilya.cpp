@@ -13,6 +13,7 @@ typedef struct {
 struct player_ {
     int hp;
     int attack;
+    int weapon;
 };
 
 player_ user;
@@ -20,9 +21,6 @@ player_ enemy;
 //drftgdf
 Weapon chouse;
 void introduction();
-void room1();
-//void room2();
-void chouse_weapon();
 void road();
 void delivery();
 void houseofcultists();
@@ -31,6 +29,7 @@ void hall();
 void artifact();
 void firstcontact();
 void fight();
+void car();
 
 
 
@@ -48,6 +47,7 @@ void introduction() {
     }
     std::cout << "По презду в офис вы встречаетесь сколлегами." << endl;
     std::cout << "Вы общаетесь с ними и обсуждаете странные далекие заказы, которые никто не любит.\n" << endl;
+    car();
 }
 
 // Новый заказ
@@ -60,21 +60,23 @@ void car() {
     if (choice == "да") {
         cout << "Вы заехали на заправку и заправили полный бак. Можете продолжать дорогу." << endl;
         road();
+
     }
     else {
         cout << "Вы проехали еще немного и заглохли." << endl;
         cout << "Game OVER\n" << endl;
+        return;
     }
 }
 
 // Путь к дому
 void road() {
     string situation[5];
-    situation[0] = "Обвал камней с холма рядом с дорогой\n";
-    situation[1] = "Остановили дпс\n";
-    situation[2] = "Пробежал олень\n";
-    situation[3] = "Вы увидели странные символы на деревьях\n";
-    situation[4] = "Вы увидели промелькнувшую в кустах тень\n";
+    situation[0] = "Вы увидели обвал камней с холма рядом с дорогой.\n";
+    situation[1] = "Остановили ДПС для проверки документов, езжайте дальше.\n";
+    situation[2] = "Мимо вашей машины пробежал олень.\n";
+    situation[3] = "Вы увидели странные символы на деревьях,зачемто вы их запомнили.\n";
+    situation[4] = "Вы увидели промелькнувшую в кустах тень, но подумали что вам показалось/\n";
     // ДОПИСАТЬ, РАСПИСАТЬ, НОРМАЛЬНО ЧТОБ   БЫЛО!!! с Николай
     int temp = 0 + rand() % 4;
     cout << situation[temp] << endl;
@@ -159,6 +161,7 @@ void artifact() {
     cin >> choice;
     if (choice == "да") {
         cout << "Вы подняли артефакт, он легко завибрировал и засветился.\n" << endl;
+        user.weapon = 40;
         firstcontact();
     }
     else if (choice == "нет") {
@@ -168,6 +171,7 @@ void artifact() {
 void firstcontact() {
     cout << "Пока Алекс изучает комнату, неожиданно в двери появляется культист в длинном темном одеянии с капюшоном." << endl;
     cout << "Он ведёт себя странно, и его голос звучит как шепот: “Ты не должен здесь быть...” " << endl;
+    fight();
     //В зависимости от выбора игрока, сцена может развернуться несколькими способами:
     //-Сбежать: Алекс пытается убежать обратно в коридор, но не удается.
     //- Убедить культиста : Он может попробовать убедить культиста, что ему нужно знать больше о доме и ритуалах.Это может привести к получению более глубокой информации.
@@ -176,38 +180,48 @@ void firstcontact() {
 void fight() {
     cout << "Вы можете ударить этого человека или убежать." << endl;
     cout << "1 - ударить, 2 - убежать из дома." << endl;
-    user.hp = 150;
+    user.hp = 110;
     user.attack = 40;
     enemy.hp = 90;
-    enemy.attack = 35;
+    enemy.attack = 55;
+    user.weapon;
     int a;
     bool win = false;
     int flag = 0;
-    cin >> a;
-    switch (a)
-    {
-    case 1 : 
-        cout << "Вы наносите урон культисту.\n" << endl;
-        enemy.hp - user.attack;
+
         while (!win) {
-            if (enemy.hp == 0) {
-                cout << "Вы вырубили культиста.\n" << endl;
-                win = true;
-                // Дальше следующая комнатка пойдет,
-            }
-            else
+            cin >> a;
+            switch (a)
             {
-                cout << "Культист собирается ударить вас.\n" << endl;
-                user.hp - enemy.attack;
-                
+            case 1:
+                if (enemy.hp <= 0) {
+                    cout << "Вы вырубили культиста.\n" << endl;
+                    win = true;
+                    introduction();
+                }
+                else if (user.hp <= 0) {
+                    cout << "Вы были убиты культистом.\n" << endl;
+                    win = true;
+                    break;
+                }
+            
+                else
+                {
+                    cout << "Вы наносите урон культисту.\n" << endl;
+                    enemy.hp -= user.attack + user.weapon;
+                    cout << "Культист собирается ударить вас.\n" << endl;
+                    user.hp -= enemy.attack;
+                }
+                break;
+
+            case 2:
+                cout << "Вы убегаете из дома.";
+                win = true;
+                break;
             }
+
         }
-    case 2 :
-        cout << "Вы убегаете из дома.";
-        break;
     }
-    
-}
 
 
 
@@ -215,12 +229,11 @@ int main() {
     system("chcp 1251");
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
-    //chouse_weapon();
     //introduction();
-    //room1();
     //car();
-    //road();
+    ////road();
     //delivery();
+    artifact();
     fight();
     return 0;
 }
