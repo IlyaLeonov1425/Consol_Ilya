@@ -15,7 +15,7 @@ struct player_ {
     int hp;
     int attack;
     int weapon;
-    int current_loc =0;
+    int current_loc = 0;
 
 };
 
@@ -288,16 +288,17 @@ int main() {
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
     //introduction();
-   // initgame();
+    initgame();
     string ch;
-    cout << location[user.current_loc].location_name;
-    int mas[4] = { 5,6,1,-9 };
+    cin >> ch;
+    if (ch == "go") {
 
-    for (int i = 0; i < 4; i++) {
-        cout << mas[i] << endl;
+        for (int i = 0; i < location[user.current_loc].p.size();i++) {
+
+            cout << location[user.current_loc].p[i].portal_name << endl;
+
+        }
     }
 
-
-
-    return 0;
 }
+    
