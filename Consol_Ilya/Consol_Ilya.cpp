@@ -289,16 +289,17 @@ int main() {
     srand(time(NULL));
     //introduction();
     initgame();
-    string ch;
-    cin >> ch;
-    if (ch == "go") {
+    while (user.hp <= 0) {
+        string ch;
+        cin >> ch;
+        if (ch == "go") {
 
-        for (int i = 0; i < location[user.current_loc].p.size();i++) {
+            for (int i = 0; i < location[user.current_loc].p.size();i++) {
 
-            cout << location[user.current_loc].p[i].portal_name << endl;
+                cout << location[user.current_loc].p[i].portal_name << endl;
 
+            }
         }
     }
-
 }
     
