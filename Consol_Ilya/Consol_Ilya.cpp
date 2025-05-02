@@ -1,23 +1,7 @@
-#include <string>
-#include <iostream>
-#include <Windows.h>
-#include <time.h>
-#include <cstdlib>
-#include <vector>
+#include "NOVEL.h"
 
-using namespace std;
 
-typedef struct {
-    string weapon;
-}Weapon;
 
-struct player_ {
-    int hp;
-    int attack;
-    int weapon;
-    int current_loc = 0;
-
-};
 
 struct portal_ {
     string portal_name;
@@ -25,267 +9,20 @@ struct portal_ {
 };
 
 struct location_ {
+
+    string text;
     string location_name;
     vector <portal_> p;
-
+    vector <item_> item_l;
 };
+
 
 location_ location[3];
 
 
 
-player_ user;
-player_ enemy;
-//drftgdf
-Weapon chouse;
-void introduction();
-void road();
-void delivery();
-void houseofcultists();
-void floorone();
-void hall();
-void artifact();
-void firstcontact();
-void fight();
-void car();
-void whisper();
-void attic();
-void map();
 
 
-
-
-//Глава первая
-//ВВедение
-void introduction() {
-    std::cout << "Вы — Алекс, молодой курьер." << std::endl;
-    std::cout << "Вы собираетесь к себе на работу." << endl;
-    std::cout << "Хотите осмотреть квартиру? (да/нет)" << endl;
-    string choice;
-    cin >> choice;
-    if (choice == "да") {
-        cout << "Квартира выглядит старой\n" << endl;
-    }
-    else if (choice == "нет") {
-        std::cout << "По презду в офис вы встречаетесь с коллегами." << endl;
-        std::cout << "Вы общаетесь с ними и обсуждаете странные далекие заказы, которые никто не любит.\n" << endl;
-        car();
-    }
-    else {
-        cout << "Не правильно. Введите только да или нет.\n";
-        }
-}
-
-// Новый заказ
-void car() {
-    std::cout << "Как раз после этого разговора к вам пришел такой заказ." << std::endl;
-    std::cout << "Нехотя вы выезжаете на своей машине в дорогу." << endl;
-    std::cout << "По пути у вас начинает кончатся топливо, хотите заехать на ближайшую заправку? (да/нет)" << endl;
-    string choice;
-    cin >> choice;
-    if (choice == "да") {
-        cout << "Вы заехали на заправку и заправили полный бак. Можете продолжать дорогу." << endl;
-        road();
-
-    }
-    else if (choice == "нет") {
-        cout << "Вы проехали еще немного и заглохли." << endl;
-        cout << "Game OVER\n" << endl;
-        return;
-    }
-    else {
-        cout << "Не правильно. Введите только да или нет.\n";
-    }
-}
-
-// Путь к дому
-void road() {
-    string situation[5];
-    situation[0] = "Вы увидели обвал камней с холма рядом с дорогой.\n";
-    situation[1] = "Остановили ДПС для проверки документов, езжайте дальше.\n";
-    situation[2] = "Мимо вашей машины пробежал олень.\n";
-    situation[3] = "Вы увидели странные символы на деревьях,зачемто вы их запомнили.\n";
-    situation[4] = "Вы увидели промелькнувшую в кустах тень, но подумали что вам показалось/\n";
-    // ДОПИСАТЬ, РАСПИСАТЬ, НОРМАЛЬНО ЧТОБ   БЫЛО!!! с Николай
-    int temp = 0 + rand() % 4;
-    cout << situation[temp] << endl;
-    delivery();
-
-}
-// Прибытие
-void delivery() {
-    cout << "Вы приближаетесь к адресу доставки." << endl;
-    cout << "Это старый большой особняк на окраине города." << endl;
-    cout << "Рядом с домом стоит странный человек и подзывает тебя к себе." << endl;
-    cout << "'Ты должен победить меня в 'камень ножницы бумага'- говорит он." << endl;
-    cout << "Вы подходите и игра начинается\n" << endl;
-
-    bool win = false;
-    int flag = 0;
-    string rps[3] = { "камень", "ножницы", "бумага" };
-    string choice;
-    int temp;
-
-    while (!win) {
-        cin >> choice;
-        temp = 0 + rand() % 2;
-        if (choice == "камень" || choice == "ножницы" || choice == "бумага") {
-
-            if (choice == "камень" && rps[temp] == "ножницы" || choice == "ножницы" && rps[temp] == "бумага" || choice == "бумага" && rps[temp] == "камень") {
-                cout << "Вы победили этого человека и он ушел\n" << endl;
-                win = true;
-                houseofcultists();
-
-            }
-            else {
-                cout << "Вы проиграли. Попробуй еще раз\n";
-
-            }
-
-        }
-        else {
-            cout << "Не правильно\n";
-        }
-
-    }
-
-}
-// Вход в дом
-void houseofcultists() {
-    cout << "Алекс открывает скрипучую дверь дома." << endl;
-    cout << "Внутри темно и холодно, в воздухе пахнет сыростью" << endl;
-    cout << "Вы хотите осмотреть дом повнимательнее? (да/нет)" << endl;
-    string choice;
-    cin >> choice;
-    if (choice == "да") {
-        cout << "Вы видите старую, еле живую мебель, затянутые паутиной окна и пыльные книги на полках" << endl;
-        floorone();
-    }
-    else if (choice == "нет") {
-        cout << "Вы отвлеклись на старое зеркало." << endl;
-        cout << "Оно не отображает действительность, в нем вы видите красивый зал." << endl;
-        cout << "Краем глаза вы замечаете как некто проходит мимо дверного проема\n" << endl;
-        floorone();
-    }
-    else {
-        cout << "Не правильно. Введите только да или нет.\n";
-    }
-
-}
-// Вторая глава
-// Первый этаж
-void floorone() {
-    cout << "Алекс, испытывающий растущее чувство беспокойства, осматривает комнату." << endl;
-    cout << "Он вдруг осознает, как долго он уже здесь — время кажется искаженным, как будто он находится вне своей реальности." << endl;
-    cout << "Алекс делает несколько шагов и ищет выход из комнаты." << endl;
-    hall();
-
-}
-void hall() {
-    cout << "Алекс выходит в длинный коридор." << endl;
-    cout << "На стенах висели старые фотографии, которые представляют людей, ранее живших в этом доме, их выражения лиц выглядят зловеще." << endl;
-    artifact();
-}
-void artifact() {
-    cout << "Алекс открывает одну из дверей и попадая в комнату, где находится странный алтарь, окруженный различными оккультными предметами.\n " << endl;
-    cout << "Хотите взять артефакт с алтаря (да/нет)" << endl;
-    string choice;
-    cin >> choice;
-    if (choice == "да") {
-        cout << "Вы подняли артефакт, он легко завибрировал и засветился.\n" << endl;
-        user.weapon = 40;
-        firstcontact();
-    }
-    else if (choice == "нет") {
-        cout << "Вы решили не брать артефакт.\n" << endl;
-        firstcontact();
-    }
-    else {
-        cout << "Не правильно. Введите только да или нет.\n";
-    }
-}
-void firstcontact() {
-    cout << "Пока Алекс изучает комнату, неожиданно в двери появляется культист в длинном темном одеянии с капюшоном." << endl;
-    cout << "Он ведёт себя странно, и его голос звучит как шепот: “Ты не должен здесь быть...” " << endl;
-    fight();
-    //В зависимости от выбора игрока, сцена может развернуться несколькими способами:
-    //-Сбежать: Алекс пытается убежать обратно в коридор, но не удается.
-    //- Убедить культиста : Он может попробовать убедить культиста, что ему нужно знать больше о доме и ритуалах.Это может привести к получению более глубокой информации.
-    //- РЕЗНЯ
-}
-void fight() {
-    cout << "Вы можете ударить этого человека или убежать." << endl;
-    cout << "1 - ударить, 2 - убежать из дома." << endl;
-    user.hp = 110;
-    user.attack = 40;
-    enemy.hp = 90;
-    enemy.attack = 54;
-
-    int a;
-    bool win = false;
-    int flag = 0;
-
-    while (!win) {
-        cin >> a;
-        switch (a)
-        {
-        case 1:
-            if (enemy.hp <= 0) {
-                cout << "Вы убили культиста.\n" << endl;
-                win = true;
-                whisper();
-            }
-            else if (user.hp <= 0) {
-                cout << "Вы были убиты культистом.\n" << endl;
-                win = true;
-                break;
-            }
-
-            else
-            {
-                cout << "Вы наносите урон культисту.\n" << endl;
-                enemy.hp -= user.attack + user.weapon;
-                cout << "Культист собирается ударить вас.\n" << endl;
-                user.hp -= enemy.attack;
-            }
-            break;
-
-        case 2:
-            cout << "Вы убегаете из дома.";
-            win = true;
-            break;
-        }
-
-    }
-}
-
-void whisper() {
-    cout << "Вдруг культисты начинают появляться рядом с домом. В ушах Алекса начинают звучать голоса и шептания о жертвах и ритуалах культа." << endl;
-    cout << "Алекс быстро находит лестницу на второй этаж и прячется там" << endl;
-    cout << "На втором этаже Алекс сталкивается с видениями, относящимися к его прошлому. Мы видим образы из его детства.\n" << endl;
-    //Видение может напоминать нечто связанное с культом.
-}
-
-void attic() {
-    cout << "Хаос продолжает расти, и Алекс прилагает все усилия, чтобы открыть люк на чердак." << endl;
-    cout << "На чердаке он находит ещё больше оккультных артефактов и старинных книг, которые придется изучить позже." << endl;
-    cout << "Алекс встречает культиста, который открыто говорит о ритуалах этого культа. Он рассказывает о том, как он не согласен с ним и что у Алекса есть возможность сбежать, если он объединиться с ним." << endl;
-    cout << "Алекс и культист-предатель Дэн находятся на затхлом чердаке, полном старинных книг и необычных артефактов. Атмосфера здесь напряженная, с едва слышным гудением, словно сам чердак дышит." << endl;
-    cout << "Алекс находит несколько оккультных книг, по которым можно разгадывать ритуалы и символику.\n" << endl;
-    cout << "Хотите прочитать книгу? (да/нет).\n" << endl;
-    string choice;
-    cin >> choice;
-    if (choice == "да") {
-        cout << "Каждая книга предоставляет информацию о ритуалах, которые проводили культисты, включая описание жертвоприношений и создания артефактов.\n" << endl;
-        //map();
-    }
-    else if (choice == "нет") {
-        //map();
-    }
-    else {
-        cout << "Не правильно. Введите только да или нет.\n";
-    }
-}
 
 void initgame() {
     location[0].location_name = "start";
@@ -293,10 +30,11 @@ void initgame() {
     location[0].p.push_back({ "d2",2 });
     location[1].location_name = "room1";
     location[1].p.push_back({ "start",0 });
+    location[1].item_l.push_back(item_::scrap);
     location[2].location_name = "room2";
     location[2].p.push_back({ "start",0 });
-
-
+    location[2].item_l.push_back(item_::axe);
+    user.item_p.push_back(item_::key);
 }
 
 
@@ -305,18 +43,61 @@ int main() {
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
     //introduction();
+
     initgame();
-    while (user.hp <= 0) {
         string ch;
+
+    while (user.hp <= 0) {
+        
         cin >> ch;
+
         if (ch == "go") {
 
             for (int i = 0; i < location[user.current_loc].p.size();i++) {
 
-                cout << location[user.current_loc].p[i].portal_name << endl;
+                //cout << location[user.current_loc].p[i].portal_name << endl;
+                typeText(location[user.current_loc].p[i].portal_name, 100);
+                cout << "\n";
+                
 
             }
+
+            cin >> ch;
+
+
+            for (int i = 0; i < location[user.current_loc].p.size(); i++) {
+                if (ch == location[user.current_loc].p[i].portal_name) {
+
+                    user.current_loc = location[user.current_loc].p[i].target;
+
+                    cout << "Вы переместились в " << location[user.current_loc].location_name << endl;
+
+                }
+            }
+       
         }
+
+        if (ch == "item") {
+            for (int i = 0; i < user.item_p.size(); i++) {
+
+               typeText(item_lib[(int)user.item_p[i]],100);
+            }
+                
+        }
+
+        if (ch == "m") {
+            typeText(location[user.current_loc].location_name, 100);
+            cout << "\n";
+        }
+
+        if (ch == "search") {
+            for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
+                typeText(item_lib[(int)location[user.current_loc].item_l[i]], 100);
+            }
+        }
+
+
+        if (ch == "q") break;
     }
 }
     

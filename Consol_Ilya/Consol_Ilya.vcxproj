@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Consol_Ilya.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NOVEL.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
