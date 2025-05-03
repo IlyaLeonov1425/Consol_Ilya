@@ -81,6 +81,7 @@ int main() {
             for (int i = 0; i < user.item_p.size(); i++) {
 
                typeText(item_lib[(int)user.item_p[i]],100);
+               cout << "\n";
             }
                 
         }
@@ -93,6 +94,15 @@ int main() {
         if (ch == "search") {
             for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
                 typeText(item_lib[(int)location[user.current_loc].item_l[i]], 100);
+                cout << "\n";
+            }
+        }
+
+        for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
+            if (ch == item_lib[(int)location[user.current_loc].item_l[i]]) {
+                user.item_p.push_back(location[user.current_loc].item_l[i]);
+                cout << "Вы подняли " << item_lib[(int)user.item_p.back()] << endl;
+                location[user.current_loc].item_l.erase(location[user.current_loc].item_l.cbegin() + i);
             }
         }
 
