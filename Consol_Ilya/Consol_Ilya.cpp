@@ -98,14 +98,21 @@ int main() {
             }
         }
 
-        for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
-            if (ch == item_lib[(int)location[user.current_loc].item_l[i]]) {
-                user.item_p.push_back(location[user.current_loc].item_l[i]);
-                cout << "Вы подняли " << item_lib[(int)user.item_p.back()] << endl;
-                location[user.current_loc].item_l.erase(location[user.current_loc].item_l.cbegin() + i);
+        if (ch == "pick") {
+            for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
+
+                cout << "Введите название предмета\n";
+
+                cin >> ch;
+                if (ch == item_lib[(int)location[user.current_loc].item_l[i]]) {
+                    user.item_p.push_back(location[user.current_loc].item_l[i]);
+                    location[user.current_loc].item_l.erase(location[user.current_loc].item_l.cbegin() + i);
+                    
+                }
+
             }
         }
-
+        
 
         if (ch == "q") break;
     }
