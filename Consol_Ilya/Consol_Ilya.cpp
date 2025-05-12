@@ -52,29 +52,19 @@ int main() {
         cin >> ch;
 
         if (ch == "go") {
-
             for (int i = 0; i < location[user.current_loc].p.size();i++) {
-
-                //cout << location[user.current_loc].p[i].portal_name << endl;
                 typeText(location[user.current_loc].p[i].portal_name, 100);
                 cout << "\n";
-                
-
             }
 
             cin >> ch;
 
-
-            for (int i = 0; i < location[user.current_loc].p.size(); i++) {
+            for (int i = 0; i < location[user.current_loc].p.size();i++) {
                 if (ch == location[user.current_loc].p[i].portal_name) {
-
                     user.current_loc = location[user.current_loc].p[i].target;
-
-                    cout << "Вы переместились в " << location[user.current_loc].location_name << endl;
-
+                    cout << location[user.current_loc].location_name<< endl;
                 }
             }
-       
         }
 
         if (ch == "item") {
@@ -98,20 +88,7 @@ int main() {
             }
         }
 
-        if (ch == "pick") {
-            for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
 
-                cout << "Введите название предмета\n";
-
-                cin >> ch;
-                if (ch == item_lib[(int)location[user.current_loc].item_l[i]]) {
-                    user.item_p.push_back(location[user.current_loc].item_l[i]);
-                    location[user.current_loc].item_l.erase(location[user.current_loc].item_l.cbegin() + i);
-                    
-                }
-
-            }
-        }
         
 
         if (ch == "q") break;
