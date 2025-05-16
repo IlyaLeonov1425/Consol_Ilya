@@ -87,6 +87,20 @@ int main() {
                 cout << "\n";
             }
         }
+        if (ch == "pick") {
+            for (int i = 0; i < location[user.current_loc].item_l.size(); i++) {
+
+                cout << "Введите название предмета\n";
+
+                cin >> ch;
+                if (ch == item_lib[(int)location[user.current_loc].item_l[i]]) {
+                    user.item_p.push_back(location[user.current_loc].item_l[i]);
+                    location[user.current_loc].item_l.erase(location[user.current_loc].item_l.cbegin() + i);
+
+                }
+
+            }
+        }
 
 
         
